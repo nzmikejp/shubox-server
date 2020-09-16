@@ -17,7 +17,7 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(fileUpload())
-
+app.use(express.static('public'))
 app.use(logger('dev'))
 
 var connectionString = 'mongodb://khoi:Khoitran2004@group-summative-shard-00-00.2tjnk.mongodb.net:27017,group-summative-shard-00-01.2tjnk.mongodb.net:27017,group-summative-shard-00-02.2tjnk.mongodb.net:27017/ShuBox?ssl=true&replicaSet=atlas-g9aucv-shard-0&authSource=admin&retryWrites=true&w=majority'

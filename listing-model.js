@@ -5,6 +5,7 @@ var listingSchema = new Schema(
     {
         id: Number,
         name: String,
+        brand: String,
         description: String,
         price: Number,
         gender: String,
