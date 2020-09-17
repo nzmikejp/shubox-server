@@ -9,6 +9,8 @@ var fileUpload = require('express-fileupload')
 var Listing = require('./listing-model')
 var Type = require('./type-model')
 var User = require('./user-model')
+var Category = require('./category-model')
+const { populate } = require('./category-model')
 
 //setup express server
 var app = express()
@@ -35,6 +37,7 @@ router.get('/testing', (req, res) => {
 //---------------------listings route---------------------
 router.get('/listings', (req, res) => {
 	Listing.find()
+	.populate('category')
 	.then((listings) => {
 		res.json(listings)
 	})
@@ -42,6 +45,7 @@ router.get('/listings', (req, res) => {
 
 router.get('/listings/:id', (req, res) => {
 	Listing.findOne({id:req.params.id})
+	.populate('category')
 	.then((listing) => {
 		res.json(listing)
 	})
@@ -157,6 +161,23 @@ router.post('/upload', (req, res) => {
 
 	uploadedFile.mv('public/' + newName, function(){
 		res.send(newName)
+	})
+})
+
+//Category
+
+router.get('/categories', (req, res) => {
+	Category.find()
+	.then((categories) => {
+		res.json(categories)
+	})
+})
+
+router.get('/categories/:id', (req, res) => {
+	Category.findOne({id:req.params.id})
+	.populate('listings')
+	.then((category) => {
+		res.json(category)
 	})
 })
 

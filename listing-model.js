@@ -12,6 +12,7 @@ var listingSchema = new Schema(
         photo: String,
         type_id: Number,
         user_id: Number,
+        category_id: Number,
     },
     {
         timestamps: true,
@@ -22,6 +23,13 @@ var listingSchema = new Schema(
 listingSchema.virtual('type', {
     ref: 'Type',
     localField: 'type_id',
+    foreignField: 'id',
+    justOne: true,
+})
+
+listingSchema.virtual('category', {
+    ref: 'Category',
+    localField: 'category_id',
     foreignField: 'id',
     justOne: true,
 })
