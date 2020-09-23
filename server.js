@@ -63,10 +63,14 @@ router.put('/listings/:id', (req, res) => {
 	Listing.findOne({id:req.params.id})
 	.then((listing) => {
 		var data = req.body
+		console.log(data)
 		Object.assign(listing, data)
+		
 		return listing.save()
 	})
 	.then((listing) => {
+
+		console.log(listing)
 		res.json(listing)
 	})
 })
